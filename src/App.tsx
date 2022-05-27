@@ -1,45 +1,26 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { dialog } from '@tauri-apps/api'
+import styles from './App.module.scss'
+import { Button, ButtonType } from './Button/Button'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+    const handleClick = async (e: React.MouseEvent<HTMLElement>) => {
+        await dialog.open({ directory: true })
+    }
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
-  )
+    return (
+        <>
+            <main className={styles.titleContainer}>
+                <h1>Space Monger Redux</h1>
+                
+                <div>
+                    <Button type={ButtonType.PRIMARY} onClick={handleClick}>Open</Button>
+                    <Button type={ButtonType.SECONDARY} onClick={handleClick}>Settings</Button>
+                </div>
+            </main>
+
+            <p className={styles.signature}>Developed by Brian Koehler</p>
+        </>
+    )
 }
 
 export default App

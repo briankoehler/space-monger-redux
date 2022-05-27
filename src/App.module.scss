@@ -1,0 +1,23 @@
+@use './styles/variables.scss';
+
+.titleContainer {
+    font-size: 2rem;
+    font-weight: 500;
+    color: variables.$yellow;
+    display: grid;
+    place-content: center;
+
+    div {
+        display: flex;
+        gap: 0.75em;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.signature {
+    color: variables.$secondary-text;
+    position: absolute;
+    bottom: 0;
+    right: 1em;
+}
