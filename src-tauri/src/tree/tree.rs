@@ -1,8 +1,9 @@
-use crate::node::Node;
+mod node;
+use node::Node;
 use std::fs;
 
 /// A struct for representing files on the OS.
-#[derive(Debug)]
+#[derive(Debug, serde::Serialize)]
 pub struct Tree {
     pub root: Node,
 }

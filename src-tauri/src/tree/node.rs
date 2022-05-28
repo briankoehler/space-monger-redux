@@ -1,8 +1,8 @@
-mod metadata;
+#[path = "./metadata.rs"] mod metadata;
 use std::fs;
 
 /// The children variants of a tree.
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize)]
 pub enum Node {
     File(File),
     Directory(Directory)
@@ -102,7 +102,7 @@ impl Node {
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize)]
 pub struct File {
     pub metadata: metadata::Metadata
 }
@@ -113,7 +113,7 @@ impl File {
             metadata: metadata::Metadata {
                 name: name.to_owned(),
                 size: metadata.len(),
-                permissions: metadata.permissions(),
+                // permissions: metadata.permissions(),
                 modified: Node::handle_metadata_result(metadata.modified()),
                 accessed: Node::handle_metadata_result(metadata.accessed()),
                 created: Node::handle_metadata_result(metadata.created())
@@ -122,7 +122,7 @@ impl File {
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize)]
 pub struct Directory {
     pub metadata: metadata::Metadata,
     pub children: Vec<Node>
@@ -134,7 +134,7 @@ impl Directory {
             metadata: metadata::Metadata {
                 name: name.to_owned(),
                 size: metadata.len(),
-                permissions: metadata.permissions(),
+                // permissions: metadata.permissions(),
                 modified: Node::handle_metadata_result(metadata.modified()),
                 accessed: Node::handle_metadata_result(metadata.accessed()),
                 created: Node::handle_metadata_result(metadata.created())
